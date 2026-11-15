@@ -3,176 +3,1305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plantilla | Visor anatómico 3D</title>
+
+<title>CTAbdomen01 | Visor 3D del tubo digestivo</title>
+
 <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+
 <style>
-:root{font-family:Arial,Helvetica,sans-serif;color:#243447;background:#f3f6f9}*{box-sizing:border-box}body{margin:0}header{background:#17324d;color:white;padding:17px 22px}header h1{margin:0;font-size:22px}header p{margin:6px 0 0;color:#dbe6f1;font-size:13px}.layout{display:flex;height:calc(100dvh - 83px);min-height:470px}.viewer{flex:1;min-width:0;background:#dce3e9}.viewer iframe{width:100%;height:100%;border:0}.panel{width:325px;overflow:auto;background:white;border-left:1px solid #dce3e9;padding:22px}h2{font-size:17px;margin:0 0 16px}h3{font-size:14px;margin:22px 0 12px}button{width:100%;border:1px solid #cbd5df;border-radius:7px;background:#f1f5f9;color:#25394b;padding:11px;margin:5px 0;cursor:pointer;font-size:14px}button.active{background:#17694b;color:white;border-color:#17694b}button.primary{background:#17324d;color:white}button:disabled,input:disabled{opacity:.45;cursor:not-allowed}.structure{border-bottom:1px solid #e4e9ef;padding:12px 0}.structure .label{font-weight:bold;font-size:14px}.structure .value{float:right;color:#17694b;font-weight:bold}.structure input[type=range]{width:100%;accent-color:#17694b;margin:14px 0 4px}.hint{font-size:12px;color:#64748b}.status{background:#edf3f7;border-radius:7px;padding:12px;font-size:12px;line-height:1.5;margin-top:20px;white-space:pre-wrap}.error{background:#fff0ed;color:#9d2d21}.note{font-size:12px;color:#64748b;line-height:1.5;margin-top:15px}@media(max-width:750px){.layout{height:auto;display:block}.viewer{height:55dvh;min-height:340px}.panel{width:100%;border-left:0}}
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #243447;
+    background: #f3f6f9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background: #17324d;
+    color: white;
+    padding: 17px 22px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+header p {
+    margin: 6px 0 0;
+    color: #dbe6f1;
+    font-size: 13px;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100dvh - 84px);
+    height: calc(100dvh - 84px);
+}
+
+.viewer {
+    flex: 1;
+    min-width: 0;
+    background: #dce3e9;
+}
+
+.viewer iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.panel {
+    width: 345px;
+    overflow: auto;
+    background: white;
+    border-left: 1px solid #dce3e9;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 17px;
+    margin: 0 0 8px;
+}
+
+h3 {
+    font-size: 14px;
+    margin: 24px 0 12px;
+}
+
+button,
+select {
+    width: 100%;
+    border: 1px solid #cbd5df;
+    border-radius: 7px;
+    background: #f1f5f9;
+    color: #25394b;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+select {
+    background: white;
+}
+
+button.active {
+    background: #17694b;
+    color: white;
+    border-color: #17694b;
+}
+
+button.primary {
+    background: #17324d;
+    color: white;
+}
+
+button:disabled,
+select:disabled,
+input:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.structure {
+    border-bottom: 1px solid #e4e9ef;
+    padding: 14px 0;
+}
+
+.structure .label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.structure .value {
+    float: right;
+    color: #17694b;
+    font-weight: bold;
+}
+
+.structure input[type=range] {
+    width: 100%;
+    accent-color: #17694b;
+    margin: 12px 0 4px;
+}
+
+.hint {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.status {
+    background: #edf3f7;
+    border-radius: 7px;
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 20px;
+    white-space: pre-wrap;
+}
+
+.error {
+    background: #fff0ed;
+    color: #9d2d21;
+}
+
+.note {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+    margin-top: 15px;
+}
+
+.calib {
+    background: #fff7e7;
+    border-radius: 7px;
+    padding: 11px;
+    font-size: 12px;
+    margin: 9px 0;
+    line-height: 1.5;
+}
+
+.calib .row {
+    display: flex;
+    gap: 6px;
+}
+
+.calib .row button {
+    flex: 1;
+    width: 0;
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media(max-width:750px) {
+    .layout {
+        height: auto;
+        min-height: 0;
+        display: block;
+    }
+
+    .viewer {
+        height: 55dvh;
+        min-height: 340px;
+    }
+
+    .panel {
+        width: 100%;
+        border-left: 0;
+    }
+}
 </style>
 </head>
+
 <body>
-<header><h1 id="page-title">Visor anatómico 3D</h1><p id="page-subtitle">Visualización interactiva para planificación quirúrgica</p></header>
+
+<header>
+    <h1>CTAbdomen01 | Visor 3D del tubo digestivo</h1>
+    <p>
+        Esófago · Estómago · Duodeno ·
+        Intestino delgado · Colon
+    </p>
+</header>
+
 <main class="layout">
-  <section class="viewer"><iframe id="api-frame" title="Modelo 3D de Sketchfab" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe></section>
-  <aside class="panel">
+
+<section class="viewer">
+    <iframe
+        id="api-frame"
+        title="Modelo anatómico 3D de Sketchfab"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        allowfullscreen>
+    </iframe>
+</section>
+
+<aside class="panel">
+
     <h2>Estructuras anatómicas</h2>
-    <p class="hint">Etapa de diagnóstico: se verificarán los objetos y materiales antes de activar los controles de las cinco estructuras.</p>
+
+    <p class="hint">
+        Cada estructura tiene visibilidad independiente.
+        Los controles de opacidad se habilitan al identificar
+        su material real.
+    </p>
+
     <div id="structures"></div>
+
     <h3>Visualización</h3>
-    <button id="show-all" disabled>Mostrar todas</button>
-    <button id="restore" class="primary" disabled>Restaurar modelo</button>
-    <div id="status" class="status" role="status">Esperando configuración...</div>
-    <p class="note">Herramienta de visualización. La exactitud anatómica depende de la segmentación y validación del modelo de origen. Evita incluir datos identificables de pacientes.</p>
-  </aside>
+
+    <button id="show-all" disabled>
+        Mostrar todas
+    </button>
+
+    <button id="restore" class="primary" disabled>
+        Restaurar modelo
+    </button>
+
+    <div
+        id="status"
+        class="status"
+        role="status"
+        aria-live="polite">
+        Cargando modelo de Sketchfab…
+    </div>
+
+    <p class="note">
+        Visualización anatómica con fines educativos y de
+        planificación. La precisión depende de la segmentación
+        y validación del modelo de origen; no constituye un
+        dispositivo médico validado.
+    </p>
+
+</aside>
+
 </main>
+
 <script>
 'use strict';
-/* ========================================================================
-  CONFIGURACIÓN DEL CASO: MODIFICAR SOLO ESTE BLOQUE.
-  - modelUID: UID de Sketchfab (32 caracteres hexadecimales).
-  - nodeName: nombre EXACTO del objeto Group en getSceneGraph().
-  - materialName: nombre EXACTO en getMaterialList() (solo para opacidad).
-  - Si no conoces nombres, deja structures: [] y consulta el diagnóstico
-    impreso en la consola (F12 > Console).
-  - No uses datos identificables de pacientes en un repositorio público.
-======================================================================== */
-const CONFIG = {
-  title: 'CTAbdomen01 | Visor 3D del tubo digestivo',
-  subtitle: 'Esófago · Estómago · Duodeno · Intestino delgado · Colon',
-  modelUID: '8c9d611b96aa409db80f74ca5ebae2c5',
-  structures: [
-    // PENDIENTE DE DIAGNÓSTICO: no asumir que los nombres originales
-    // CTesofago, CTestomago, CTduodeno, CTdelgado, CTcolon
-    // coinciden con los nodos y materiales reales de Sketchfab.
-  ],
-  opacityStep: 5
-};
-/* ======================== FIN DE CONFIGURACIÓN ========================= */
+
+/* =========================================================
+   CONFIGURACIÓN DEL MODELO SKETCHFAB
+========================================================= */
+
+const UID = '8c9d611b96aa409db80f74ca5ebae2c5';
+
+/* =========================================================
+   ESTRUCTURAS ANATÓMICAS VERIFICADAS
+========================================================= */
+
+const ITEMS = [
+    {
+        key: 'esofago',
+        label: 'Esófago',
+        nodeName: 'CTesofago'
+    },
+    {
+        key: 'estomago',
+        label: 'Estómago',
+        nodeName: 'CTestomago'
+    },
+    {
+        key: 'duodeno',
+        label: 'Duodeno',
+        nodeName: 'CTduodeno'
+    },
+    {
+        key: 'delgado',
+        label: 'Intestino delgado',
+        nodeName: 'CTdelgado'
+    },
+    {
+        key: 'colon',
+        label: 'Colon',
+        nodeName: 'CTcolon'
+    }
+];
+
+/* =========================================================
+   MATERIALES
+
+   Se completará después de verificar visualmente
+   qué material corresponde a cada estructura.
+
+   Ejemplo:
+   esofago: 'Material.001'
+
+   IMPORTANTE:
+   Este ejemplo NO representa una asociación verificada.
+========================================================= */
+
+const VERIFIED_MATERIALS = {};
+
+/* =========================================================
+   VARIABLES GENERALES
+========================================================= */
+
 const $ = id => document.getElementById(id);
+
 const state = new Map();
+
 let api = null;
-let ready = false;
 let graph = null;
 let materials = [];
-function status(message, isError=false){$('status').textContent=message;$('status').classList.toggle('error',isError)}
-function walk(node, fn){fn(node);for(const child of node.children||[])walk(child,fn)}
-function findNode(name){let result=null;walk(graph,node=>{if(node.name===name && node.type==='Group')result=node});return result}
-function printDiagnostics(){
-  console.group('DIAGNÓSTICO SKETCHFAB');
-  console.log('UID:',CONFIG.modelUID);
-  console.table((()=>{const rows=[];walk(graph,n=>{if(n.name)rows.push({name:n.name,type:n.type,id:n.instanceID})});return rows})());
-  console.table(materials.map(m=>({name:m.name,id:m.id,opacityEnabled:m.channels?.Opacity?.enable,opacityFactor:m.channels?.Opacity?.factor})));
-  console.groupEnd();
+let ready = false;
+let preview = null;
+let operation = Promise.resolve();
+
+const clones = x => JSON.parse(JSON.stringify(x));
+
+/* =========================================================
+   MENSAJES DE ESTADO
+========================================================= */
+
+function status(msg, error = false) {
+    $('status').textContent = msg;
+    $('status').classList.toggle('error', error);
 }
-function visibility(id, visible){return new Promise((resolve,reject)=>{
-  const done=err=>err?reject(err):resolve();
-  try{visible?api.show(id,done):api.hide(id,done)}catch(e){reject(e)}
-})}
-function setMaterial(material){return new Promise((resolve,reject)=>{
-  try{api.setMaterial(material,err=>err?reject(err):resolve())}catch(e){reject(e)}
-})}
-function renderStructure(cfg,s){
-  const box=document.createElement('div');box.className='structure';
-  const label=document.createElement('div');label.className='label';label.textContent=cfg.label;box.append(label);
-  const button=document.createElement('button');button.className='active';button.textContent='● Mostrar '+cfg.label;box.append(button);
-  button.addEventListener('click',async()=>{
-    if(s.visibilityBusy)return;s.visibilityBusy=true;button.disabled=true;
-    try{const next=!s.visible;await visibility(s.nodeId,next);s.visible=next;button.classList.toggle('active',next);button.textContent=(next?'● Mostrar ':'○ Oculto: ')+cfg.label;status('Visualización actualizada.')}catch(e){console.error(e);status('Error al cambiar visibilidad de '+cfg.label,true)}
-    finally{s.visibilityBusy=false;button.disabled=false}
-  });
-  s.button=button;
-  if(s.material){
-    const row=document.createElement('div');row.className='label';row.style.marginTop='12px';row.textContent='Opacidad';
-    const value=document.createElement('span');value.className='value';value.textContent=s.initialOpacity+'%';row.append(value);box.append(row);
-    const slider=document.createElement('input');slider.type='range';slider.min=0;slider.max=100;slider.step=CONFIG.opacityStep||5;slider.value=s.initialOpacity;slider.setAttribute('aria-label','Opacidad de '+cfg.label);box.append(slider);
-    const hint=document.createElement('div');hint.className='hint';hint.textContent='0% transparente · 100% sólido';box.append(hint);
-    s.slider=slider;s.value=value;
-    slider.addEventListener('input',()=>{s.targetOpacity=Number(slider.value)/100;value.textContent=slider.value+'%';flushOpacity(s,cfg)});
-  }
-  $('structures').append(box);
-}
-async function flushOpacity(s,cfg){
-  if(s.materialBusy||!s.material||!ready)return;
-  if(Math.abs(s.appliedOpacity-s.targetOpacity)<0.00001)return;
-  s.materialBusy=true;
-  try{
-    while(Math.abs(s.appliedOpacity-s.targetOpacity)>=0.00001){
-      const target=s.targetOpacity;
-      // Material original obtenido de la API: conservar todos sus canales.
-      const updated=JSON.parse(JSON.stringify(s.material));
-      updated.channels.Opacity.enable=true;
-      updated.channels.Opacity.factor=target;
-      await setMaterial(updated);
-      s.material=updated;s.appliedOpacity=target;
+
+/* =========================================================
+   IDENTIFICACIÓN DE NODOS
+========================================================= */
+
+function visit(n, fn) {
+    fn(n);
+
+    for (const child of n.children || []) {
+        visit(child, fn);
     }
-    status('Opacidad de '+cfg.label+': '+Math.round(s.appliedOpacity*100)+'%.');
-  }catch(e){console.error('setMaterial:',e);status('No se pudo modificar la opacidad de '+cfg.label+'. Consulta la consola.',true)}
-  finally{s.materialBusy=false}
 }
-async function restore(){
-  $('restore').disabled=true;$('show-all').disabled=true;
-  try{
-    for(const cfg of CONFIG.structures){
-      const s=state.get(cfg.key);await visibility(s.nodeId,true);s.visible=true;
-      s.button.classList.add('active');s.button.textContent='● Mostrar '+cfg.label;
-      if(s.slider){s.slider.value=s.initialOpacity;s.value.textContent=s.initialOpacity+'%';s.targetOpacity=s.initialOpacity/100;await flushOpacity(s,cfg)}
+
+function nodeByName(name) {
+    let found = null;
+
+    visit(graph, n => {
+        if (
+            n.type === 'Group' &&
+            n.name === name
+        ) {
+            found = n;
+        }
+    });
+
+    return found;
+}
+
+/* =========================================================
+   VISIBILIDAD
+========================================================= */
+
+function visibility(id, show) {
+    return new Promise((resolve, reject) => {
+        try {
+            api[show ? 'show' : 'hide'](
+                id,
+                err => err ? reject(err) : resolve()
+            );
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+/* =========================================================
+   ACTUALIZACIÓN DE MATERIALES
+========================================================= */
+
+function updateMaterial(mat) {
+    return new Promise((resolve, reject) => {
+        try {
+            api.setMaterial(
+                mat,
+                err => err ? reject(err) : resolve()
+            );
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+/* =========================================================
+   COLA DE OPERACIONES
+========================================================= */
+
+function enqueue(fn) {
+    const next = operation
+        .catch(() => {})
+        .then(fn);
+
+    operation = next;
+
+    return next;
+}
+
+/* =========================================================
+   MODIFICACIÓN DE OPACIDAD
+========================================================= */
+
+function materialWithOpacity(material, opacity) {
+
+    const changed = clones(material);
+
+    changed.channels.Opacity.enable = true;
+    changed.channels.Opacity.factor = opacity;
+
+    return changed;
+}
+
+function materialByName(name) {
+    return materials.find(x => x.name === name);
+}
+
+/* =========================================================
+   BOTONES DE VISIBILIDAD
+========================================================= */
+
+function changeButton(s) {
+
+    s.button.classList.toggle(
+        'active',
+        s.visible
+    );
+
+    s.button.textContent =
+        (s.visible ? '● Visible: ' : '○ Oculto: ') +
+        s.cfg.label;
+}
+
+/* =========================================================
+   MANEJO DE ERRORES
+========================================================= */
+
+function errorLog(context, e) {
+    console.error(context, e);
+
+    status(
+        context + '; revisa la consola.',
+        true
+    );
+}
+
+/* =========================================================
+   DIAGNÓSTICO SKETCHFAB
+========================================================= */
+
+function info() {
+
+    console.group(
+        'DIAGNÓSTICO SKETCHFAB CTAbdomen01'
+    );
+
+    const rows = [];
+
+    visit(graph, n => {
+        if (n.name) {
+            rows.push({
+                name: n.name,
+                type: n.type,
+                id: n.instanceID
+            });
+        }
+    });
+
+    console.table(rows);
+
+    console.table(
+        materials.map(m => ({
+            name: m.name,
+            id: m.id,
+            stateSetID: m.stateSetID,
+            opacityEnabled:
+                m.channels?.Opacity?.enable,
+            opacityFactor:
+                m.channels?.Opacity?.factor
+        }))
+    );
+
+    console.groupEnd();
+}
+
+/* =========================================================
+   DETENER PRUEBA DE MATERIAL
+========================================================= */
+
+async function stopPreview() {
+
+    if (!preview) return;
+
+    const p = preview;
+
+    preview = null;
+
+    const original = materialByName(
+        p.materialName
+    );
+
+    if (original) {
+        await updateMaterial(original);
     }
-    status('Modelo restaurado.');
-  }catch(e){console.error(e);status('Error al restaurar el modelo.',true)}
-  finally{$('restore').disabled=false;$('show-all').disabled=false}
+
+    if (p.button) {
+        p.button.textContent =
+            'Probar material (10 %)';
+    }
 }
-$('restore').addEventListener('click',restore);
-$('show-all').addEventListener('click',async()=>{
-  $('show-all').disabled=true;
-  try{for(const cfg of CONFIG.structures){const s=state.get(cfg.key);await visibility(s.nodeId,true);s.visible=true;s.button.classList.add('active');s.button.textContent='● Mostrar '+cfg.label}status('Todas las estructuras visibles.')}
-  catch(e){console.error(e);status('Error al mostrar las estructuras.',true)}
-  finally{$('show-all').disabled=false}
-});
-$('page-title').textContent=CONFIG.title;
-$('page-subtitle').textContent=CONFIG.subtitle;
-if(!/^[a-f0-9]{32}$/i.test(CONFIG.modelUID)){
-  status('CONFIGURACIÓN PENDIENTE: reemplaza modelUID por el UID real de Sketchfab.',true);
-}else{
-  const client=new Sketchfab('1.12.1',$('api-frame'));
-  status('Cargando modelo 3D...');
-  client.init(CONFIG.modelUID,{
-    autostart:1,ui_infos:0,ui_controls:1,ui_stop:0,
-    success(instance){
-      api=instance;api.start();
-      api.addEventListener('viewerready',()=>{
-        api.getSceneGraph((graphErr,result)=>{
-          if(graphErr||!result){console.error(graphErr);status('No se pudo leer la jerarquía del modelo.',true);return}
-          graph=result;
-          api.getMaterialList((materialErr,list)=>{
-            if(materialErr){console.error(materialErr);status('No se pudo leer la lista de materiales.',true);return}
-            materials=list||[];printDiagnostics();
-            if(!CONFIG.structures.length){status('Modelo cargado. DIAGNÓSTICO: abre F12 > Console para ver nombres de objetos y materiales. Después configura structures en el HTML.');return}
-            const errors=[];const usedKeys=new Set();
-            for(const cfg of CONFIG.structures){
-              if(!cfg.key||usedKeys.has(cfg.key)){errors.push('Clave duplicada o vacía: '+cfg.key);continue}
-              usedKeys.add(cfg.key);
-              const node=findNode(cfg.nodeName);
-              if(!node){errors.push('Objeto no encontrado: '+cfg.nodeName);continue}
-              const material=cfg.materialName?materials.find(m=>m.name===cfg.materialName):null;
-              if(cfg.materialName && (!material||!material.channels?.Opacity)){
-                errors.push('Material o canal Opacity no encontrado: '+cfg.materialName);continue
-              }
-              const initialOpacity=Math.max(0,Math.min(100,cfg.initialOpacity??100));
-              state.set(cfg.key,{nodeId:node.instanceID,visible:true,visibilityBusy:false,material:material?JSON.parse(JSON.stringify(material)):null,materialBusy:false,initialOpacity,targetOpacity:initialOpacity/100,appliedOpacity:material?.channels?.Opacity?.factor??1});
+
+/* =========================================================
+   PRUEBA TEMPORAL DE MATERIAL
+========================================================= */
+
+async function previewMaterial(s) {
+
+    await enqueue(async () => {
+
+        try {
+
+            if (
+                preview &&
+                preview.materialName === s.select.value
+            ) {
+
+                await stopPreview();
+
+                status('Prueba terminada.');
+
+                return;
             }
-            if(errors.length){status('CONFIGURACIÓN INCOMPLETA:\n'+errors.join('\n')+'\nConsulta el diagnóstico en la consola.',true);return}
-            $('structures').replaceChildren();
-            for(const cfg of CONFIG.structures)renderStructure(cfg,state.get(cfg.key));
-            ready=true;$('show-all').disabled=false;$('restore').disabled=false;
-            status('Modelo listo. Controles disponibles.');
-            // Aplicar opacidades iniciales si no coinciden con el material publicado.
-            for(const cfg of CONFIG.structures){const s=state.get(cfg.key);if(s.material)flushOpacity(s,cfg)}
-          });
-        });
-      });
-    },
-    error(){status('Error al iniciar Sketchfab. Revisa el UID y la visibilidad pública del modelo.',true)}
-  });
+
+            await stopPreview();
+
+            const material = materialByName(
+                s.select.value
+            );
+
+            if (!material) {
+                throw new Error(
+                    'Selecciona un material'
+                );
+            }
+
+            await updateMaterial(
+                materialWithOpacity(
+                    material,
+                    0.10
+                )
+            );
+
+            preview = {
+                materialName: material.name,
+                button: s.test
+            };
+
+            s.test.textContent =
+                'Terminar prueba';
+
+            status(
+                'Prueba temporal: ' +
+                material.name +
+                ' al 10 %. Observa qué estructura cambia. ' +
+                'Luego termina la prueba.'
+            );
+
+        } catch (e) {
+
+            errorLog(
+                'Error al probar material',
+                e
+            );
+        }
+    });
 }
+
+/* =========================================================
+   ASOCIACIÓN DE MATERIALES
+========================================================= */
+
+function setMapping(s, name) {
+
+    if (!name) {
+
+        s.materialName = '';
+
+        s.slider.disabled = true;
+
+        s.value.textContent = '—';
+
+        return;
+    }
+
+    const duplicate = [...state.values()].find(
+        other =>
+            other !== s &&
+            other.materialName === name
+    );
+
+    if (duplicate) {
+
+        status(
+            'El material ' +
+            name +
+            ' ya está asociado a ' +
+            duplicate.cfg.label +
+            '. Verifica antes de continuar.',
+            true
+        );
+
+        s.select.value =
+            s.materialName || '';
+
+        return;
+    }
+
+    s.materialName = name;
+
+    s.slider.disabled = false;
+
+    const current = materialByName(name);
+
+    const value = Math.round(
+        (
+            current?.channels?.Opacity?.factor ?? 1
+        ) * 100
+    );
+
+    s.slider.value = value;
+
+    s.value.textContent =
+        value + '%';
+
+    status(
+        s.cfg.label +
+        ' asociado a ' +
+        name +
+        '. Comprueba el resultado al mover su deslizador.'
+    );
+}
+
+/* =========================================================
+   GENERACIÓN DE CONTROLES ANATÓMICOS
+========================================================= */
+
+function render(s) {
+
+    const div = document.createElement('div');
+
+    div.className = 'structure';
+
+    /* NOMBRE DE LA ESTRUCTURA */
+
+    const title = document.createElement('div');
+
+    title.className = 'label';
+
+    title.textContent = s.cfg.label;
+
+    div.append(title);
+
+    /* BOTÓN DE VISIBILIDAD */
+
+    s.button = document.createElement('button');
+
+    s.button.disabled = true;
+
+    s.button.textContent =
+        '● Visible: ' + s.cfg.label;
+
+    div.append(s.button);
+
+    s.button.addEventListener('click', () =>
+        enqueue(async () => {
+
+            s.button.disabled = true;
+
+            try {
+
+                await stopPreview();
+
+                await visibility(
+                    s.nodeId,
+                    !s.visible
+                );
+
+                s.visible = !s.visible;
+
+                changeButton(s);
+
+                status(
+                    'Visibilidad de ' +
+                    s.cfg.label +
+                    ' actualizada.'
+                );
+
+            } catch (e) {
+
+                errorLog(
+                    'Error al cambiar visibilidad',
+                    e
+                );
+
+            } finally {
+
+                s.button.disabled = false;
+            }
+        })
+    );
+
+    /* ETIQUETA DE OPACIDAD */
+
+    const row = document.createElement('div');
+
+    row.className = 'label';
+
+    row.style.marginTop = '12px';
+
+    row.textContent = 'Opacidad';
+
+    s.value = document.createElement('span');
+
+    s.value.className = 'value';
+
+    s.value.textContent = '—';
+
+    row.append(s.value);
+
+    div.append(row);
+
+    /* DESLIZADOR DE OPACIDAD */
+
+    s.slider = document.createElement('input');
+
+    s.slider.type = 'range';
+
+    s.slider.min = 0;
+
+    s.slider.max = 100;
+
+    s.slider.step = 5;
+
+    s.slider.value = 100;
+
+    s.slider.disabled = true;
+
+    s.slider.setAttribute(
+        'aria-label',
+        'Opacidad de ' + s.cfg.label
+    );
+
+    div.append(s.slider);
+
+    s.slider.addEventListener('input', () => {
+
+        s.value.textContent =
+            s.slider.value + '%';
+
+        s.target =
+            Number(s.slider.value) / 100;
+
+        if (!s.changing) {
+
+            s.changing = true;
+
+            enqueue(async () => {
+
+                try {
+
+                    await stopPreview();
+
+                    while (
+                        s.applied !== s.target
+                    ) {
+
+                        const target = s.target;
+
+                        const m = materialByName(
+                            s.materialName
+                        );
+
+                        if (!m) {
+                            throw new Error(
+                                'Material no disponible'
+                            );
+                        }
+
+                        await updateMaterial(
+                            materialWithOpacity(
+                                m,
+                                target
+                            )
+                        );
+
+                        s.applied = target;
+                    }
+
+                    status(
+                        'Opacidad ' +
+                        s.cfg.label +
+                        ': ' +
+                        Math.round(
+                            s.applied * 100
+                        ) +
+                        ' %.'
+                    );
+
+                } catch (e) {
+
+                    errorLog(
+                        'Error al cambiar opacidad',
+                        e
+                    );
+
+                } finally {
+
+                    s.changing = false;
+                }
+            });
+        }
+    });
+
+    /* PANEL DE CALIBRACIÓN */
+
+    const box = document.createElement('div');
+
+    box.className = 'calib';
+
+    const caption = document.createElement('div');
+
+    caption.textContent =
+        'Asociación del material (calibración inicial)';
+
+    box.append(caption);
+
+    /* SELECTOR DE MATERIALES */
+
+    s.select = document.createElement('select');
+
+    s.select.setAttribute(
+        'aria-label',
+        'Material de ' + s.cfg.label
+    );
+
+    s.select.append(
+        new Option(
+            'Seleccionar material…',
+            ''
+        )
+    );
+
+    for (const m of materials) {
+
+        s.select.append(
+            new Option(
+                m.name,
+                m.name
+            )
+        );
+    }
+
+    box.append(s.select);
+
+    /* BOTONES DE CALIBRACIÓN */
+
+    const controls = document.createElement('div');
+
+    controls.className = 'row';
+
+    s.test = document.createElement('button');
+
+    s.test.textContent =
+        'Probar material (10 %)';
+
+    s.test.disabled = true;
+
+    const assign = document.createElement('button');
+
+    assign.textContent =
+        'Asociar a ' + s.cfg.label;
+
+    assign.disabled = true;
+
+    controls.append(
+        s.test,
+        assign
+    );
+
+    box.append(controls);
+
+    const help = document.createElement('div');
+
+    help.className = 'hint';
+
+    help.textContent =
+        'Prueba un material, observa qué estructura ' +
+        'pierde opacidad, termina la prueba y asígnalo ' +
+        'a la estructura correcta.';
+
+    box.append(help);
+
+    div.append(box);
+
+    /* EVENTOS DEL SELECTOR */
+
+    s.select.addEventListener('change', () => {
+
+        s.test.disabled =
+            !s.select.value;
+
+        assign.disabled =
+            !s.select.value;
+    });
+
+    /* PROBAR MATERIAL */
+
+    s.test.addEventListener(
+        'click',
+        () => previewMaterial(s)
+    );
+
+    /* ASOCIAR MATERIAL */
+
+    assign.addEventListener(
+        'click',
+        () => enqueue(async () => {
+
+            try {
+
+                await stopPreview();
+
+                const name =
+                    s.select.value;
+
+                if (!name) return;
+
+                setMapping(s, name);
+
+                if (
+                    s.materialName === name
+                ) {
+
+                    s.applied =
+                        materialByName(name)
+                            ?.channels
+                            ?.Opacity
+                            ?.factor ?? 1;
+
+                    console.log(
+                        'ASOCIACIÓN VERIFICADA:',
+                        s.cfg.nodeName,
+                        '=>',
+                        name
+                    );
+                }
+
+            } catch (e) {
+
+                errorLog(
+                    'Error al asociar material',
+                    e
+                );
+            }
+        })
+    );
+
+    $('structures').append(div);
+
+    /* ASOCIACIONES PREVIAMENTE VERIFICADAS */
+
+    if (
+        VERIFIED_MATERIALS[s.cfg.key] &&
+        materialByName(
+            VERIFIED_MATERIALS[s.cfg.key]
+        )
+    ) {
+
+        s.select.value =
+            VERIFIED_MATERIALS[s.cfg.key];
+
+        s.test.disabled = false;
+
+        assign.disabled = false;
+
+        setMapping(
+            s,
+            s.select.value
+        );
+
+        s.applied =
+            materialByName(
+                s.materialName
+            ).channels.Opacity.factor;
+
+        box.classList.add('hidden');
+    }
+
+    s.button.disabled = false;
+}
+
+/* =========================================================
+   MOSTRAR TODAS LAS ESTRUCTURAS
+========================================================= */
+
+$('show-all').addEventListener(
+    'click',
+    () => enqueue(async () => {
+
+        $('show-all').disabled = true;
+
+        try {
+
+            await stopPreview();
+
+            for (const s of state.values()) {
+
+                await visibility(
+                    s.nodeId,
+                    true
+                );
+
+                s.visible = true;
+
+                changeButton(s);
+            }
+
+            status(
+                'Todas las estructuras están visibles.'
+            );
+
+        } catch (e) {
+
+            errorLog(
+                'Error al mostrar todas',
+                e
+            );
+
+        } finally {
+
+            $('show-all').disabled = false;
+        }
+    })
+);
+
+/* =========================================================
+   RESTAURAR MODELO
+========================================================= */
+
+$('restore').addEventListener(
+    'click',
+    () => enqueue(async () => {
+
+        $('restore').disabled = true;
+
+        try {
+
+            await stopPreview();
+
+            /* RESTAURAR VISIBILIDAD */
+
+            for (const s of state.values()) {
+
+                await visibility(
+                    s.nodeId,
+                    true
+                );
+
+                s.visible = true;
+
+                changeButton(s);
+            }
+
+            /* RESTAURAR MATERIALES */
+
+            for (const m of materials) {
+
+                await updateMaterial(m);
+            }
+
+            /* RESTAURAR DESLIZADORES */
+
+            for (const s of state.values()) {
+
+                if (s.materialName) {
+
+                    s.slider.value = 100;
+
+                    s.value.textContent =
+                        '100%';
+
+                    s.target = 1;
+
+                    s.applied = 1;
+                }
+            }
+
+            status(
+                'Restauradas visibilidad y opacidad originales.'
+            );
+
+        } catch (e) {
+
+            errorLog(
+                'Error al restaurar',
+                e
+            );
+
+        } finally {
+
+            $('restore').disabled = false;
+        }
+    })
+);
+
+/* =========================================================
+   INICIALIZAR SKETCHFAB VIEWER API
+========================================================= */
+
+const client = new Sketchfab(
+    '1.12.1',
+    $('api-frame')
+);
+
+client.init(
+    UID,
+    {
+        autostart: 1,
+        ui_infos: 0,
+        ui_controls: 1,
+        ui_stop: 0,
+
+        success(instance) {
+
+            api = instance;
+
+            api.start();
+
+            api.addEventListener(
+                'viewerready',
+                () => {
+
+                    /* OBTENER JERARQUÍA */
+
+                    api.getSceneGraph(
+                        (err, result) => {
+
+                            if (
+                                err ||
+                                !result
+                            ) {
+
+                                errorLog(
+                                    'No fue posible leer el árbol de objetos',
+                                    err
+                                );
+
+                                return;
+                            }
+
+                            graph = result;
+
+                            /* OBTENER MATERIALES */
+
+                            api.getMaterialList(
+                                (matErr, resultMaterials) => {
+
+                                    if (
+                                        matErr ||
+                                        !resultMaterials
+                                    ) {
+
+                                        errorLog(
+                                            'No fue posible leer los materiales',
+                                            matErr
+                                        );
+
+                                        return;
+                                    }
+
+                                    materials =
+                                        resultMaterials.map(clones);
+
+                                    info();
+
+                                    const missing = [];
+
+                                    /* IDENTIFICAR CADA ÓRGANO */
+
+                                    for (const cfg of ITEMS) {
+
+                                        const node =
+                                            nodeByName(
+                                                cfg.nodeName
+                                            );
+
+                                        if (!node) {
+
+                                            missing.push(
+                                                cfg.nodeName
+                                            );
+
+                                            continue;
+                                        }
+
+                                        const s = {
+
+                                            cfg,
+
+                                            nodeId:
+                                                node.instanceID,
+
+                                            visible: true,
+
+                                            materialName: '',
+
+                                            target: 1,
+
+                                            applied: 1,
+
+                                            changing: false
+                                        };
+
+                                        state.set(
+                                            cfg.key,
+                                            s
+                                        );
+
+                                        render(s);
+                                    }
+
+                                    /* VALIDAR ESTRUCTURAS */
+
+                                    if (missing.length) {
+
+                                        status(
+                                            'No se encontraron estos objetos: ' +
+                                            missing.join(', '),
+                                            true
+                                        );
+
+                                        return;
+                                    }
+
+                                    ready = true;
+
+                                    $('show-all').disabled =
+                                        false;
+
+                                    $('restore').disabled =
+                                        false;
+
+                                    status(
+                                        'Modelo cargado. Visibilidad lista. ' +
+                                        'Para habilitar la opacidad, identifica ' +
+                                        'y asocia cada material con su estructura.'
+                                    );
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+        },
+
+        error() {
+
+            status(
+                'Error al cargar el modelo. ' +
+                'Verifica el UID y el acceso público en Sketchfab.',
+                true
+            );
+        }
+    }
+);
+
 </script>
+
 </body>
 </html>
